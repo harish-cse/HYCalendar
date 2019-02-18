@@ -101,7 +101,7 @@ public class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDat
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.register(CalendarHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier:"sectionHeader")
+        collectionView.register(CalendarHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:"sectionHeader")
         self.addSubview(collectionView)
         collectionView.reloadData()
     }
@@ -141,7 +141,7 @@ public class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDat
             let section = (year - currentYear) * 12 + (month - currentMonth)
 
             let lastIndex = dataSourceArray[section].count - 1
-            self.collectionView.scrollToItem(at: IndexPath.init(item: lastIndex, section:section), at: UICollectionViewScrollPosition.bottom, animated: false)
+            self.collectionView.scrollToItem(at: IndexPath.init(item: lastIndex, section:section), at: UICollectionView.ScrollPosition.bottom, animated: false)
             self.collectionView.reloadData()
         }
 
@@ -155,9 +155,9 @@ public class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDat
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
 
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             let headerView =
-                collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath) as? CalendarHeaderView
+                collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath) as? CalendarHeaderView
             headerView?.isRTL = isRTL
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMMM"
